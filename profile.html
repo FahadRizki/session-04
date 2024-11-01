@@ -3,26 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Session 04</title>
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body class="bg-light">
+<body class="draw">
 
-  <div class="container my-5">
+  <div class="container my-5 bg-white p-4 rounded-2">
     <div id="section-profile">
-      <h3 class="text-center mb-5">Section Profile</h3>
+      <h3 class="text-center mb-5">Profile</h3>
       <div class="bg-white p-5 shadow-lg rounded-2 d-grid">
         <div class="row">
           <div class="col-6 d-flex gap-4">
-            <img src="https://plus.unsplash.com/premium_photo-1718570264126-48594b527c85?q=80&w=1942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" width="200" class="img-thumbnail" alt="photo-profile">
+            <img id="tableBanner" src="https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D" width="200" class="img-thumbnail" alt="photo-profile">
+            
+            <input style="display: none;" type="file" id="inputBanner" onchange="ubah()">
             <div class="d-flex flex-column justify-content-between">
               <div>
-                <h3 id="nama">John Doe</h3>
-                <p id="role">Frontend Developer</p>
+                <h3 id="nama">Asep galon</h3>
+                <p id="role">QA</p>
               </div>
 
-              <div>
-                <button class="btn btn-primary" onclick="handleEdit()">Edit</button>
+              <div class="d-flex gap-1 ">
+                <label class="btn btn-primary banner" for="inputBanner">Change Profile</label>
+                <button class="btn btn-outline-primary p-2" onclick="handleEdit()">Edit</button>
                 <button class="btn btn-outline-success" onclick="handleResume()">Resume</button>
               </div>
             </div>
@@ -37,11 +41,11 @@
             </div>
             
             <div>
-              <p id="availibility">Full Time</p>
-              <p id="usia">20</p>
-              <p id="lokasi">Jakarta</p>
+              <p id="availibility">trial</p>
+              <p id="usia">40</p>
+              <p id="lokasi">subang</p>
               <p id="pengalaman">1</p>
-              <p id="email">johndoe@mail.com</p>
+              <p id="email">asep@mail.com</p>
             </div>
           </div>
         </div>
@@ -49,34 +53,36 @@
     </div>
 
     <div id="section-form" style="display: none;">
-      <h3 class="text-center mt-5">Section Form</h3>
-      <div class="bg-white rounded-2 shadow-lg p-5">
-        <form onsubmit="return handleSubmit(event)">
-          <div class="mb-3">
+      <button id="btn" onclick="handleClose()">X</button>
+      
+      <div id="isi" class="bg-white rounded-2 shadow-lg p-5">
+        <p class="text-center">Section Form</p>
+        <form id="form" onsubmit="return handleSubmit(event)">
+          <div class="mb-1">
             <label for="form-nama" class="form-label">Nama</label>
             <input type="text" class="form-control" id="form-nama" placeholder="nama">
           </div>
-          <div class="mb-3">
+          <div class="mb-1">
             <label for="form-role" class="form-label">Role</label>
             <input type="text" class="form-control" id="form-role" placeholder="role">
           </div>
-          <div class="mb-3">
+          <div class="mb-1">
             <label for="form-availibility" class="form-label">Availibility</label>
             <input type="text" class="form-control" id="form-availibility" placeholder="availibilty">
           </div>
-          <div class="mb-3">
+          <div class="mb-1">
             <label for="form-usia" class="form-label">Usia</label>
             <input type="text" class="form-control" id="form-usia" placeholder="usia">
           </div>
-          <div class="mb-3">
+          <div class="mb-1">
             <label for="form-lokasi" class="form-label">Lokasi</label>
             <input type="text" class="form-control" id="form-lokasi" placeholder="lokasi">
           </div>
-          <div class="mb-3">
+          <div class="mb-1">
             <label for="form-pengalaman" class="form-label">Pengalaman</label>
             <input type="text" class="form-control" id="form-pengalaman" placeholder="pengalaman">
           </div>
-          <div class="mb-3">
+          <div class="mb-1">
             <label for="form-email" class="form-label">Email</label>
             <input type="email" class="form-control" id="form-email" placeholder="email">
           </div>
@@ -92,7 +98,7 @@
   <script>
     
     function handleEdit() {
-      document.getElementById("section-form").style.display = ""
+      document.getElementById("section-form").style.display = "block"
 
       // get values
       const nama = document.getElementById("nama").textContent
@@ -115,7 +121,7 @@
       
     }
 
-    function handleResume() {
+    function handleClose() {
       document.getElementById("section-form").style.display = "none"
     }
 
@@ -130,10 +136,43 @@
       document.getElementById("lokasi").textContent = document.getElementById("form-lokasi").value
       document.getElementById("pengalaman").textContent = document.getElementById("form-pengalaman").value
       document.getElementById("email").textContent = document.getElementById("form-email").value
-
+     
       document.getElementById("section-form").style.display = "none"
 
     }
+
+    
+    let bannerImg = document.getElementById("tableBanner");
+    let inputBanner = document.getElementById("inputBanner");
+
+    function ubah() {
+     
+      let file = inputBanner.files[0];
+      if (file) {
+          let imageURL = URL.createObjectURL(file);
+          bannerImg.src = imageURL;
+
+
+          localStorage.setItem("bannerImage", imageURL);
+      }
+  }
+
+  window.onload = function() {
+      let savedImageURL = localStorage.getItem("bannerImage")
+      if (savedImageURL) {
+          bannerImg.src = savedImageURL;
+      }
+     
+  };
+
+
+
+    
+    
+
+
+
+
   </script>
 </body>
 </html>
